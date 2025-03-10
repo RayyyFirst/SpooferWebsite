@@ -20,6 +20,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth; /* Added smooth scrolling for entire page */
         }
         
         body {
@@ -82,7 +83,7 @@
             font-weight: 500;
             padding: 5px 10px;
             border-radius: 4px;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
         
         .nav-links a:hover {
@@ -131,7 +132,7 @@
             text-decoration: none;
             border-radius: 4px;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         
@@ -140,9 +141,18 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
         }
         
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
+        }
+        
         .btn-secondary {
             background-color: rgba(255, 255, 255, 0.2);
             margin-left: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.3);
         }
         
         /* Features Section */
@@ -330,6 +340,11 @@
             font-size: 0.9rem;
         }
         
+        /* Scroll offset to account for fixed header */
+        section {
+            scroll-margin-top: 80px; /* Added to ensure sections scroll to the right position */
+        }
+        
         /* Media Queries */
         @media (max-width: 768px) {
             .hero h1 {
@@ -379,12 +394,12 @@
     </nav>
     
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="container">
             <h1>Unlock Animation Freedom in Roblox</h1>
             <p>Hollow Spoofer allows you to bypass animation restrictions in Roblox Studio by seamlessly reuploading bugged animations with our advanced spoofing technology.</p>
-            <a href="https://discord.gg/mEjftPKdFQ" class="btn">Download Now</a>
-            <a href="https://discord.gg/mEjftPKdFQ" class="btn btn-secondary">Join Community</a>
+            <a href="#download" class="btn">Download Now</a>
+            <a href="#community" class="btn btn-secondary">Join Community</a>
         </div>
     </section>
     
@@ -464,7 +479,8 @@
                 <h3>Latest Release with Extreme Spoofing Capabilities</h3>
                 <p>This version includes significant improvements to the spoofing algorithm and support for the latest Roblox Studio updates.</p>
             </div>
-            <a href="https://discord.gg/mEjftPKdFQ" class="btn">Download Hollow Spoofer v2.0</a>
+            <!-- Replace "#" with your actual download link -->
+            <a href="#" class="btn">Download Hollow Spoofer v2.0</a>
         </div>
     </section>
     
@@ -482,7 +498,8 @@
                 </div>
                 <h3>Join Our Discord Server</h3>
                 <p>Connect with other Hollow Spoofer users, get support from our team, and be the first to know about updates and new features.</p>
-                <a href="https://discord.gg/mEjftPKdFQ" class="btn">Join Discord</a>
+                <!-- Replace "#" with your actual Discord invite link -->
+                <a href="#" class="btn">Join Discord</a>
             </div>
         </div>
     </section>
@@ -491,7 +508,7 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="#">Home</a>
+                <a href="#home">Home</a>
                 <a href="#features">Features</a>
                 <a href="#how-to-use">How to Use</a>
                 <a href="#download">Download</a>
@@ -502,5 +519,26 @@
             </div>
         </div>
     </footer>
+
+    <!-- Simple JavaScript to ensure smooth scrolling in all browsers -->
+    <script>
+        // Make sure all anchor links scroll smoothly
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return; // Skip empty links
+                
+                const targetElement = document.querySelector(targetId);
+                if(!targetElement) return; // Skip if target doesn't exist
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 70, // Adjust offset to account for fixed header
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
